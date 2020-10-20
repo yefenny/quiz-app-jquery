@@ -5,24 +5,54 @@ const store = {
   // 5 or more questions are required
   questions: [
     {
-      question: 'What color is broccoli?',
+      question: 'Who created jQuery?',
       answers: [
-        'red',
-        'orange',
-        'pink',
-        'green'
+        'Tim Cook',
+        'Jeff Bezos',
+        'John Resig',
+        'Brendan Eich'
       ],
-      correctAnswer: 'green'
+      correctAnswer: 'John Resig'
     },
     {
-      question: 'What is the current year?',
+      question: 'What was jQuery called originally?',
       answers: [
-        '1970',
-        '2015',
-        '2019',
-        '2005'
+        'queryJ',
+        'JSelect',
+        'John Resig Library',
+        'JSLibrary'
       ],
-      correctAnswer: '2019'
+      correctAnswer: 'JSelect'
+    },
+    {
+      question: 'Which of the following is NOT a benefit to using jQuery?',
+      answers: [
+        'Create animated applications',
+        'DOM Manipulation',
+        'Simplifies JavaScript into more methods',
+        'Extends the length of your JavaScript code'
+      ],
+      correctAnswer: 'Extends the length of your JavaScript code'
+    },
+    {
+      question: 'Which is the correct syntax to select every paragraph (p) element using JavaScript?',
+      answers: [
+        '$('p')',
+        '('p')',
+        '$('paragraph')',
+        '${'p'}'
+      ],
+      correctAnswer: '$('p')'
+    },
+    {
+      question: 'Which of the following is NOT a method within the jQuery library?',
+      answers: [
+        'click()',
+        'submit()',
+        'attr()',
+        'join()'
+      ],
+      correctAnswer: 'join()'
     }
   ],
   quizStarted: false,
