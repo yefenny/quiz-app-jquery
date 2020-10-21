@@ -7,13 +7,16 @@ body{
 
 h1{
   text-align: center;
+  color: white;
 }
+
 .container{
   width: 60%;
   margin: 100px auto;
   border: 2px solid black;
   padding: 40px;
-  background-color: white;
+  background-color: black;
+  color: white;
 }
 
 .restart {
