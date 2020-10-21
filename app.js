@@ -66,15 +66,35 @@ function main() {
 
 // These functions return HTML templates
 function questionTemplate() {
+  let answerTemp = '';
+  let questionTemp = store.questions[store.questionNumber];
+  for(let i=0; i < question.answers.length; i++) {
+  answerTemp += `<label>${question.answers[i]}</label>
+  <input type="radio" name="answer" value="${question.answers[i]}">`;
+  }
   // return html with the question in the title and the answers as radio buttons
-  console.log('questionTemplate');
+  let questionsPage = `
+  <div>
+    <h4>${questionTemp.question}</h4>
+  <form>
+    <label> ${questionTemp.answers[0]}</label>
+    <input type="radio" name="answer" value="${questionTemp.answers[0]}
+
+    <button type="submit">Submit</button>
+  </form>
+  `
   // get score value
   scoreTemplate();
 }
 
 function startPageTemplate() {
   // render a welcome message with a button to start the quiz
-  console.log('starPageTemplate');
+  let startPageTemplate = `<div class="container">
+  <h2>Welcome to the quiz!</h2>
+  <p>Are you ready to test your knowledge on JQuery?</p>
+  <button>Start!</button>
+</div>`;
+  return startPageTemplate;
 }
 
 function scoreTemplate() {
@@ -102,7 +122,11 @@ function endOfGameTemplate() {
 /********** RENDER FUNCTION(S) **********/
 function render() {
   // if quizz started render question x
-
+  if(store.quizStarted === false ){
+    $('main').html(startPageTemplate());
+} else if(store.quizStarted){
+    $('main').html(questionTemplate());
+}
   // if not  render StartPage
   startPageTemplate();
 }
@@ -116,8 +140,11 @@ function render() {
 // This function handle on click start
 function onClickStart() {
   // on click Start button set quizzStarted to true
-  // render again
-  render();
+  $('.js-start-button').on('click', function () {
+    store.quizStarted = true;
+    // render again
+    render();
+  });
 }
 
 function onSubmit() {
