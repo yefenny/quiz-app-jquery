@@ -65,22 +65,26 @@ function main() {
   onClickStart();
   onSubmit();
   onNext();
+  onClickNewGame();
 }
 
 // These functions return HTML templates
 function questionTemplate() {
   let answerTemp = ``;
+  let question = true;
   let questionTemp = store.questions[store.questionNumber];
 
   for (let i = 0; i < questionTemp.answers.length; i++) {
     answerTemp += `<li><input type="radio" name="answer" value="${questionTemp.answers[i]}" required>
     <label>${questionTemp.answers[i]}</label>
    </li>`;
-
   }
   // return html with the question in the title and the answers as radio buttons
   let questionsPage = `
   <div class="container">
+    <h3>Question ${store.questionNumber + 1} out of ${
+    store.questions.length
+  }: </h3>
     <h4>${questionTemp.question}</h4>
   <form>
 
@@ -89,11 +93,11 @@ function questionTemplate() {
   <ul>  
     <button class="js-submit" type="submit">Submit</button>
   </form>
+  <div class="score"> ${scoreTemplate(question)}</div>
   `;
 
   return questionsPage;
   // get score value
-  scoreTemplate();
 }
 
 function startPageTemplate() {
@@ -106,9 +110,11 @@ function startPageTemplate() {
   return startPageTemplate;
 }
 
-function scoreTemplate() {
+function scoreTemplate(question) {
   //  calculate the score and return a html with correct format
-  let wrongs = store.questionNumber + 1 - store.score;
+  let wrongs = question
+    ? store.questionNumber - store.score
+    : store.questionNumber + 1 - store.score;
   return `<p>Your Score: </p>
           <ul>
           <li>Correct: ${store.score}</li>
@@ -146,6 +152,13 @@ function wrongAnswerTemplate() {
 
 function endOfGameTemplate() {
   // "End of Game" on title
+  let question = true;
+  let endGame = ` <div class="container">
+  <h2>Final Quiz Score</h2>
+  ${scoreTemplate(question)}
+  <button class="js-restart-button">Restart Quiz?</button>
+</div>`;
+  $('main').html(endGame);
   // show score
   // newGame botton
 }
@@ -156,7 +169,9 @@ function render() {
   if (store.quizStarted === false) {
     $('main').html(startPageTemplate());
   } else if (store.quizStarted) {
-    $('main').html(questionTemplate());
+    if (store.questionNumber < store.questions.length)
+      $('main').html(questionTemplate());
+    else $('main').html(endOfGameTemplate());
   }
   // if not  render StartPage
   startPageTemplate();
@@ -171,7 +186,7 @@ function render() {
 // This function handle on click start
 function onClickStart() {
   // on click Start button set quizzStarted to true
-  $('.js-start-button').on('click', function () {
+  $('main').on('click', '.js-start-button', (evt) => {
     store.quizStarted = true;
     // render again
     render();
@@ -201,13 +216,19 @@ function onSubmit() {
 
 function onNext() {
   // on click next button render again
+  $('main').on('click', '.js-next-button', (evt) => {
+    store.questionNumber++;
+    render();
+  });
 }
 
 function onClickNewGame() {
-  // reset question number
-  // reset score
-  // set quizzStarted to false
-  // render;
+  $('main').on('click', '.js-restart-button', (evt) => {
+    store.questionNumber = 0;
+    store.score = 0;
+    store.quizStarted = false;
+    render();
+  });
 }
 
 $(main());
