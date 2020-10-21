@@ -85,6 +85,7 @@ function scoreTemplate() {
 function rightAnswerTemplate() {
   // Display correct on title
   // show score
+  // next button
 }
 
 function wrongAnswerTemplate() {
