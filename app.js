@@ -74,7 +74,12 @@ function questionTemplate() {
 
 function startPageTemplate() {
   // render a welcome message with a button to start the quiz
-  console.log('starPageTemplate');
+  let startPageTemplate = `<div class="container">
+  <h2>Welcome to the quiz!</h2>
+  <p>Are you ready to test your knowledge on JQuery?</p>
+  <button>Start!</button>
+</div>`;
+  return startPageTemplate;
 }
 
 function scoreTemplate() {
@@ -102,7 +107,11 @@ function endOfGameTemplate() {
 /********** RENDER FUNCTION(S) **********/
 function render() {
   // if quizz started render question x
-
+  if(store.quizStarted === false ){
+    $('main').html(startPageTemplate());
+} else if(store.quizStarted){
+    $('main').html(questionTemplate());
+}
   // if not  render StartPage
   startPageTemplate();
 }
