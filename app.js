@@ -62,6 +62,9 @@ const store = {
 // This function will run the render functions
 function main() {
   render();
+  onClickStart();
+  onSubmit();
+  onNext();
 }
 
 // These functions return HTML templates
@@ -92,7 +95,11 @@ function startPageTemplate() {
   let startPageTemplate = `<div class="container">
   <h2>Welcome to the quiz!</h2>
   <p>Are you ready to test your knowledge on JQuery?</p>
+<<<<<<< HEAD
   <button>Start!</button>
+=======
+  <button class="js-start-button">Start!</button>
+>>>>>>> c955058a99ef014cf41782a43562edcf9409cc67
 </div>`;
   return startPageTemplate;
 }
@@ -105,6 +112,7 @@ function scoreTemplate() {
 function rightAnswerTemplate() {
   // Display correct on title
   // show score
+  // next button
 }
 
 function wrongAnswerTemplate() {
@@ -122,11 +130,19 @@ function endOfGameTemplate() {
 /********** RENDER FUNCTION(S) **********/
 function render() {
   // if quizz started render question x
+<<<<<<< HEAD
   if(store.quizStarted === false ){
     $('main').html(startPageTemplate());
 } else if(store.quizStarted){
     $('main').html(questionTemplate());
 }
+=======
+  if (store.quizStarted === false) {
+    $('main').html(startPageTemplate());
+  } else if (store.quizStarted) {
+    $('main').html(questionTemplate());
+  }
+>>>>>>> c955058a99ef014cf41782a43562edcf9409cc67
   // if not  render StartPage
   startPageTemplate();
 }
