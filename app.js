@@ -69,8 +69,28 @@ function main() {
 
 // These functions return HTML templates
 function questionTemplate() {
+  let answerTemp = '';
+  let questionTemp = store.questions[store.questionNumber];
+  for(let i=0; i < question.answers.length; i++) {
+  answerTemp += `<label>${question.answers[i]}</label>
+  <input type="radio" name="answer" value="${question.answers[i]}">`;
+  }
   // return html with the question in the title and the answers as radio buttons
-  console.log('questionTemplate');
+  let questionsPage = `
+  <div>
+    <h4>${questionTemp.question}</h4>
+  <form>
+    <label>${questionTemp.answers[0]}</label>
+    <input type="radio" name="answer" value="${questionTemp.answers[0]}"
+    <label>${questionTemp.answers[1]}</label>
+    <input type="radio" name="answer" value="${questionTemp.answers[1]}"
+    <label>${questionTemp.answers[2]}</label>
+    <input type="radio" name="answer" value="${questionTemp.answers[2]}"
+    <label>${questionTemp.answers[3]}</label>
+    <input type="radio" name="answer" value="${questionTemp.answers[3]}"
+    <button type="submit">Submit</button>
+  </form>
+  `
   // get score value
   scoreTemplate();
 }
