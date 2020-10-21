@@ -73,7 +73,7 @@ function questionTemplate() {
   let questionTemp = store.questions[store.questionNumber];
   for(let i=0; i < questionTemp.answers.length; i++) {
   answerTemp += `<label>${questionTemp.answers[i]}</label>
-  <input type="radio" name="answer" value="${questionTemp.answers[i]}">`;
+  <input type="radio" name="answer" value="${questionTemp.answers[i]}" required>`;
   }
   // return html with the question in the title and the answers as radio buttons
   let questionsPage = `
