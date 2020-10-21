@@ -60,29 +60,51 @@ const store = {
 /********** TEMPLATE GENERATION FUNCTIONS **********/
 
 // This function will run the render functions
-function main() {}
+function main() {
+  render();
+}
 
 // These functions return HTML templates
 function questionTemplate() {
   // return html with the question in the title and the answers as radio buttons
+  console.log('questionTemplate');
+  // get score value
+  scoreTemplate();
 }
 
 function startPageTemplate() {
   // render a welcome message with a button to start the quiz
+  console.log('starPageTemplate');
 }
 
 function scoreTemplate() {
   //  calculate the score and return a html with correct format
+  console.log('run scoreTemplate');
+}
+
+function rightAnswerTemplate() {
+  // Display correct on title
+  // show score
+}
+
+function wrongAnswerTemplate() {
+  // Display "wrong" on title
+  // show the right answer
+  // next button
+}
+
+function endOfGameTemplate() {
+  // "End of Game" on title
+  // show score
+  // newGame botton
 }
 
 /********** RENDER FUNCTION(S) **********/
 function render() {
   // if quizz started render question x
-  // if not  render StartPage
-}
 
-function renderQuestion() {
-  // render question using template
+  // if not  render StartPage
+  startPageTemplate();
 }
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
@@ -90,3 +112,30 @@ function renderQuestion() {
 /********** EVENT HANDLER FUNCTIONS **********/
 
 // These functions handle events (submit, click, etc)
+
+// This function handle on click start
+function onClickStart() {
+  // on click Start button set quizzStarted to true
+  // render again
+  render();
+}
+
+function onSubmit() {
+  //  if question is correct render to correct page
+  // else render to wrong page
+  // increment question number
+  // render
+}
+
+function onNext() {
+  // on click next button render again
+}
+
+function onClickNewGame() {
+  // reset question number
+  // reset score
+  // set quizzStarted to false
+  // render;
+}
+
+$(main());
