@@ -62,6 +62,9 @@ const store = {
 // This function will run the render functions
 function main() {
   render();
+  onClickStart();
+  onSubmit();
+  onNext();
 }
 
 // These functions return HTML templates
@@ -77,7 +80,7 @@ function startPageTemplate() {
   let startPageTemplate = `<div class="container">
   <h2>Welcome to the quiz!</h2>
   <p>Are you ready to test your knowledge on JQuery?</p>
-  <button>Start!</button>
+  <button class="js-start-button">Start!</button>
 </div>`;
   return startPageTemplate;
 }
@@ -108,11 +111,11 @@ function endOfGameTemplate() {
 /********** RENDER FUNCTION(S) **********/
 function render() {
   // if quizz started render question x
-  if(store.quizStarted === false ){
+  if (store.quizStarted === false) {
     $('main').html(startPageTemplate());
-} else if(store.quizStarted){
+  } else if (store.quizStarted) {
     $('main').html(questionTemplate());
-}
+  }
   // if not  render StartPage
   startPageTemplate();
 }
@@ -126,8 +129,11 @@ function render() {
 // This function handle on click start
 function onClickStart() {
   // on click Start button set quizzStarted to true
-  // render again
-  render();
+  $('.js-start-button').on('click', function () {
+    store.quizStarted = true;
+    // render again
+    render();
+  });
 }
 
 function onSubmit() {
