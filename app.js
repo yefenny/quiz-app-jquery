@@ -71,22 +71,26 @@ function main() {
 function questionTemplate() {
   let answerTemp = ``;
   let questionTemp = store.questions[store.questionNumber];
+
   for (let i = 0; i < questionTemp.answers.length; i++) {
     answerTemp += `<li><input type="radio" name="answer" value="${questionTemp.answers[i]}" required>
     <label>${questionTemp.answers[i]}</label>
    </li>`;
+
   }
   // return html with the question in the title and the answers as radio buttons
   let questionsPage = `
   <div class="container">
     <h4>${questionTemp.question}</h4>
   <form>
+
   <ul>
     ${answerTemp}
   <ul>  
     <button class="js-submit" type="submit">Submit</button>
   </form>
   `;
+
   return questionsPage;
   // get score value
   scoreTemplate();
