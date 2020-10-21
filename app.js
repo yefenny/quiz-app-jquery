@@ -65,6 +65,7 @@ function main() {
   onClickStart();
   onSubmit();
   onNext();
+  onClickNewGame();
 }
 
 // These functions return HTML templates
@@ -81,6 +82,7 @@ function questionTemplate() {
   // return html with the question in the title and the answers as radio buttons
   let questionsPage = `
   <div class="container">
+    <h2>Question ${store.questionNumber + 1} out of ${store.questions.length}</h2>
     <h4>${questionTemp.question}</h4>
   <form>
   <ul>
@@ -88,6 +90,7 @@ function questionTemplate() {
   <ul>  
     <button class="js-submit" type="submit">Submit</button>
   </form>
+  ${scoreTemplate(true)}
   `;
 
   return questionsPage;
@@ -105,13 +108,16 @@ function startPageTemplate() {
   return startPageTemplate;
 }
 
-function scoreTemplate() {
+function scoreTemplate(question) {
   //  calculate the score and return a html with correct format
-  let wrongs = store.questionNumber + 1 - store.score;
+  let wrong;
+  if(question){
+    wrong = store.questionNumber - store.score;
+  } else if(!question) wrong = store.questionNumber + 1 - store.score;
   return `<p>Your Score: </p>
           <ul>
           <li>Correct: ${store.score}</li>
-          <li>Incorrect:${wrongs}</li>
+          <li>Incorrect: ${wrong}</li>
           </ul>`;
 }
 
@@ -144,9 +150,16 @@ function wrongAnswerTemplate() {
 }
 
 function endOfGameTemplate() {
+  let endOfGame = `<div class="container">
+  <h2>Final Quiz Score</h2>
+  ${scoreTemplate(true)}
+  <button class="js-restart-button">Restart Quiz?</button>
+</div>
+  `
   // "End of Game" on title
   // show score
   // newGame botton
+  return endOfGame;
 }
 
 /********** RENDER FUNCTION(S) **********/
@@ -155,7 +168,8 @@ function render() {
   if (store.quizStarted === false) {
     $('main').html(startPageTemplate());
   } else if (store.quizStarted) {
-    $('main').html(questionTemplate());
+    if (store.questionNumber < store.questions.length) $('main').html(questionTemplate());
+    else $('main').html(endOfGameTemplate());
   }
   // if not  render StartPage
   startPageTemplate();
@@ -170,7 +184,7 @@ function render() {
 // This function handle on click start
 function onClickStart() {
   // on click Start button set quizzStarted to true
-  $('.js-start-button').on('click', function () {
+  $('main').on('click', '.js-start-button', evt => {
     store.quizStarted = true;
     // render again
     render();
@@ -199,10 +213,20 @@ function onSubmit() {
 }
 
 function onNext() {
+  $('main').on('click', '.js-next-button', evt => {
+    store.questionNumber += 1;
+    render();
+  })
   // on click next button render again
 }
 
 function onClickNewGame() {
+  $('main').on('click', '.js-restart-button', evt =>{
+    store.score = 0;
+    store.questionNumber = 0;
+    store.quizStarted = false;
+    render();
+  })
   // reset question number
   // reset score
   // set quizzStarted to false
