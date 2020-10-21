@@ -71,9 +71,9 @@ function main() {
 function questionTemplate() {
   let answerTemp = '';
   let questionTemp = store.questions[store.questionNumber];
-  for(let i=0; i < question.answers.length; i++) {
-  answerTemp += `<label>${question.answers[i]}</label>
-  <input type="radio" name="answer" value="${question.answers[i]}">`;
+  for (let i = 0; i < questionTemp.answers.length; i++) {
+    answerTemp += `<label>${questionTemp.answers[i]}</label>
+  <input type="radio" name="answer" value="${questionTemp.answers[i]}">`;
   }
   // return html with the question in the title and the answers as radio buttons
   let questionsPage = `
@@ -85,7 +85,7 @@ function questionTemplate() {
 
     <button type="submit">Submit</button>
   </form>
-  `
+  `;
   // get score value
   scoreTemplate();
 }
@@ -95,11 +95,7 @@ function startPageTemplate() {
   let startPageTemplate = `<div class="container">
   <h2>Welcome to the quiz!</h2>
   <p>Are you ready to test your knowledge on JQuery?</p>
-<<<<<<< HEAD
-  <button>Start!</button>
-=======
   <button class="js-start-button">Start!</button>
->>>>>>> c955058a99ef014cf41782a43562edcf9409cc67
 </div>`;
   return startPageTemplate;
 }
@@ -130,19 +126,11 @@ function endOfGameTemplate() {
 /********** RENDER FUNCTION(S) **********/
 function render() {
   // if quizz started render question x
-<<<<<<< HEAD
-  if(store.quizStarted === false ){
-    $('main').html(startPageTemplate());
-} else if(store.quizStarted){
-    $('main').html(questionTemplate());
-}
-=======
   if (store.quizStarted === false) {
     $('main').html(startPageTemplate());
   } else if (store.quizStarted) {
     $('main').html(questionTemplate());
   }
->>>>>>> c955058a99ef014cf41782a43562edcf9409cc67
   // if not  render StartPage
   startPageTemplate();
 }
