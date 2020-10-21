@@ -2,6 +2,7 @@
 body{
   font-family: 'Ubuntu Mono', monospace;
   background-image: url('teaching-1552092162.jpg');
+  background-repeat: repeat;
 }
 
 h1{
