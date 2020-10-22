@@ -8,31 +8,90 @@ body{
 h1{
   text-align: center;
   color: white;
+  font-size: 40px;
 }
 
-.container{
-  width: 60%;
-  margin: 100px auto;
-  border: 2px solid black;
-  padding: 40px;
-  background-color: black;
-  color: white;
+h4{
+  margin: 0;
 }
 
-.restart {
-  font-size: 16px;
-  height: 50px;
-  width: 160px;
-}
-
-button {
-  font-size: 16px;
-  height: 40px;
+button{
+  font-size: 18px;
+  height: auto;
   width: 80px;
 }
 
 li{
   list-style-type: none;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: auto;
+  border: 2px solid black;
+  padding: 40px;
+  background-color: darkslateblue;
+  color: white;
+  opacity: .8;
+  align-items: center;
+}
+
+.score{
+  display: inline-flex;
+  font-size: 18px;
+}
+
+.radioButton{
+  font-size: 18px;
+  line-height: 1.1em;
+}
+
+.restart{
+  font-size: 16px;
+  height: 50px;
+  width: 160px;
+}
+
+.js-submit{
+  text-align: center;
+}
+
+.center-submit{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*  --Desktop View-- */
+
+@media only screen and (min-width: 800px) {
+
+  .radioAlign{
+    padding: 10px 0;
+  }
+
+  .score{
+    height: auto;
+    display: inline-flex;
+    width: auto;
+    padding: 30px;
+    color: white;
+    float: right;
+  }
+
+  .container{
+    height: auto;
+    width:  50%;
+    overflow: auto;
+  }
+
+  .radioButton{
+    white-space: nowrap;
+  }
+
+
 }
 
 .score{

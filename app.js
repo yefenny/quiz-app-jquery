@@ -76,25 +76,28 @@ function questionTemplate() {
   let questionTemp = store.questions[store.questionNumber];
 
   for (let i = 0; i < questionTemp.answers.length; i++) {
-    answerTemp += `<li><input type="radio" name="answer" value="${questionTemp.answers[i]}" required>
+    answerTemp += `<li class="radioButton" ><input type="radio" name="answer" value="${questionTemp.answers[i]}" required>
     <label>${questionTemp.answers[i]}</label>
    </li>`;
   }
   // return html with the question in the title and the answers as radio buttons
   let questionsPage = `
   <div class="container">
-    <h3>Question ${store.questionNumber + 1} out of ${
+    <h4>Question ${store.questionNumber + 1} out of ${
     store.questions.length
-  }: </h3>
-    <h4>${questionTemp.question}</h4>
-  <form>
-
-  <ul>
-    ${answerTemp}
-  <ul>  
-    <button class="js-submit" type="submit">Submit</button>
-  </form>
-  <div class="score"> ${scoreTemplate(true)}</div>
+    }: </h4>
+    <h3>${questionTemp.question}</h3>
+    <form>
+      <ul class="radioAlign">
+        ${answerTemp}
+      </ul>
+      <div class="center-submit">  
+        <button class="js-submit" type="submit">Submit</button>
+      </div>
+    </form>
+  
+    <div class="score">${scoreTemplate(true)}</div>
+  </div>
   `;
 
   return questionsPage;
@@ -104,7 +107,7 @@ function startPageTemplate() {
   // render a welcome message with a button to start the quiz
   let startPageTemplate = `<div class="container">
   <h2>Welcome to the quiz!</h2>
-  <p>Are you ready to test your knowledge on JQuery?</p>
+  <p>Are you ready to test your knowledge on jQuery?</p>
   <button class="js-start-button">Start!</button>
 </div>`;
   return startPageTemplate;
@@ -153,6 +156,12 @@ function wrongAnswerTemplate() {
 }
 
 function endOfGameTemplate() {
+  let results = `<div class="container">
+  <h2>Final Quiz Score</h2>
+  <h4>Correct: 3</h4>
+  <h4>Incorrect: 2</h4>
+  <button class="js-restart-button">Restart Quiz?</button>
+</div>`;
   // "End of Game" on title
   let endGame = ` <div class="container">
   <h2>Final Quiz Score</h2>
@@ -162,6 +171,7 @@ function endOfGameTemplate() {
   $('main').html(endGame);
   // show score
   // newGame botton
+  
 }
 
 /********** RENDER FUNCTION(S) **********/
@@ -176,6 +186,7 @@ function render() {
   }
   // if not  render StartPage
   startPageTemplate();
+
 }
 
 // This function conditionally replaces the contents of the <main> tag based on the state of the store
