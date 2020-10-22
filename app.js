@@ -123,7 +123,7 @@ function scoreTemplate(noAdd) {
   return `<p>Your Score: </p>
           <ul>
           <li>Correct: ${store.score}</li>
-          <li>Incorrect: ${wrongs}</li>
+          <li>Incorrect:${wrongs}</li>
           </ul>`;
 }
 
@@ -227,10 +227,6 @@ function onSubmit() {
 }
 
 function onNext() {
-  $('main').on('click', '.js-next-button', evt => {
-    store.questionNumber += 1;
-    render();
-  })
   // on click next button render again
   $('main').on('click', '.js-next-button', (evt) => {
     store.questionNumber++;
