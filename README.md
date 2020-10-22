@@ -1,1 +1,2 @@
-### Boilerplate app structure for Quiz App project
+### jQuery Quiz Application
+### Created by Yefenny Chireno, Tomas Mier, and Griffin Braid
