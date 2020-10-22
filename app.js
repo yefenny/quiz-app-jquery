@@ -123,7 +123,7 @@ function scoreTemplate(noAdd) {
   return `<p>Your Score: </p>
           <ul>
           <li>Correct: ${store.score}</li>
-          <li>Incorrect: ${wrong}</li>
+          <li>Incorrect: ${wrongs}</li>
           </ul>`;
 }
 
