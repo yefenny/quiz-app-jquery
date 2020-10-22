@@ -59,7 +59,7 @@ const store = {
 
 /********** TEMPLATE GENERATION FUNCTIONS **********/
 
-// This function will run the render functions
+// This function will run the render and all buttons functions
 function main() {
   render();
   onClickStart();
@@ -70,30 +70,37 @@ function main() {
 
 // These functions return HTML templates
 function questionTemplate() {
-
+  // create a variable to store the radio buttons with the labels as a list item
   let answerTemp = ``;
+  // get the question we are at assign the value to questionTemp
   let questionTemp = store.questions[store.questionNumber];
+
   for (let i = 0; i < questionTemp.answers.length; i++) {
-    answerTemp += `<li><input type="radio" name="answer" value="${questionTemp.answers[i]}" required>
+    answerTemp += `<li class="radioButton" ><input type="radio" name="answer" value="${questionTemp.answers[i]}" required>
     <label>${questionTemp.answers[i]}</label>
    </li>`;
   }
   // return html with the question in the title and the answers as radio buttons
   let questionsPage = `
   <div class="container">
-    <h2>Question: ${store.questionNumber + 1} out of ${store.questions.length}</h2>
-    <h4>${questionTemp.question}</h4>
-  <form>
-  <ul>
-    ${answerTemp}
-  <ul>  
-    <button class="js-submit" type="submit">Submit</button>
-  </form>
-  ${scoreTemplate(true)}
+    <h4>Question ${store.questionNumber + 1} out of ${
+    store.questions.length
+    }: </h4>
+    <h3>${questionTemp.question}</h3>
+    <form>
+      <ul class="radioAlign">
+        ${answerTemp}
+      </ul>
+      <div class="center-submit">  
+        <button class="js-submit" type="submit">Submit</button>
+      </div>
+    </form>
+  
+    <div class="score">${scoreTemplate(true)}</div>
+  </div>
   `;
+
   return questionsPage;
-  // get score value
-  scoreTemplate();
 }
 
 function startPageTemplate() {
@@ -108,8 +115,11 @@ function startPageTemplate() {
 
 function scoreTemplate(noAdd) {
   //  calculate the score and return a html with correct format
+  let wrongs = noAdd
+    ? store.questionNumber - store.score
+    : store.questionNumber + 1 - store.score;
+  ('');
 
-  let wrongs = noAdd ? store.questionNumber - store.score : store.questionNumber + 1 - store.score;
   return `<p>Your Score: </p>
           <ul>
           <li>Correct: ${store.score}</li>
@@ -118,19 +128,19 @@ function scoreTemplate(noAdd) {
 }
 
 function rightAnswerTemplate() {
+  // Display correct on title
+  // show score
+  // next button
   let rightAnswer = `   <div class="container">
   <h2>That is correct!</h2>
   ${scoreTemplate()}
   <button class='js-next-button'>Next</button>
 </div>`;
   $('main').html(rightAnswer);
-  // Display correct on title
-  // show score
-  // next button
 }
 
 function wrongAnswerTemplate() {
-  // Display "wrong" on title
+  // Shows that the question it's incorrect
   let wrongAnswer = `<div class="container">
     <h2>Ouch! That is incorrect!</h2>
     <p>You got this, keep going!</p>
@@ -153,7 +163,12 @@ function endOfGameTemplate() {
   <button class="js-restart-button">Restart Quiz?</button>
 </div>`;
   // "End of Game" on title
-    return results;
+  let endGame = ` <div class="container">
+  <h2>Final Quiz Score</h2>
+  ${scoreTemplate(true)}
+  <button class="js-restart-button">Restart Quiz?</button>
+</div>`;
+  $('main').html(endGame);
   // show score
   // newGame botton
   
@@ -165,7 +180,8 @@ function render() {
   if (store.quizStarted === false) {
     $('main').html(startPageTemplate());
   } else if (store.quizStarted) {
-    if(store.questionNumber < store.questions.length) $('main').html(questionTemplate());
+    if (store.questionNumber < store.questions.length)
+      $('main').html(questionTemplate());
     else $('main').html(endOfGameTemplate());
   }
   // if not  render StartPage
@@ -182,7 +198,7 @@ function render() {
 // This function handle on click start
 function onClickStart() {
   // on click Start button set quizzStarted to true
-  $('main').on('click', '.js-start-button', evt => {
+  $('main').on('click', '.js-start-button', (evt) => {
     store.quizStarted = true;
     // render again
     render();
@@ -212,25 +228,19 @@ function onSubmit() {
 
 function onNext() {
   // on click next button render again
-  $('main').on('click', '.js-next-button', evt => {
-    store.questionNumber++
+  $('main').on('click', '.js-next-button', (evt) => {
+    store.questionNumber++;
     render();
-  })
+  });
 }
 
 function onClickNewGame() {
-  // reset question number
-  $('main').on('click', '.js-restart-button', evt => {
+  $('main').on('click', '.js-restart-button', (evt) => {
     store.questionNumber = 0;
-    // reset score
     store.score = 0;
-    // set quizzStarted to false
     store.quizStarted = false;
-    // render;
     render();
-  })
-  
-  
+  });
 }
 
 $(main());
