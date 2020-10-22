@@ -85,17 +85,6 @@ function questionTemplate() {
   <div class="container">
     <h4>Question ${store.questionNumber + 1} out of ${
     store.questions.length
-<<<<<<< HEAD
-  }: </h3>
-    <h4>${questionTemp.question}</h4>
-  <form>
-  <ul>
-    ${answerTemp}
-  <ul>  
-    <button class="js-submit" type="submit">Submit</button>
-  </form>
-  <div class="score"> ${scoreTemplate(true)}</div>
-=======
     }: </h4>
     <h3>${questionTemp.question}</h3>
     <form>
@@ -109,7 +98,6 @@ function questionTemplate() {
   
     <div class="score">${scoreTemplate(true)}</div>
   </div>
->>>>>>> 20657b8f73f50bb18a1ddf5c329f1172d9040697
   `;
 
   return questionsPage;
@@ -168,21 +156,12 @@ function wrongAnswerTemplate() {
 }
 
 function endOfGameTemplate() {
-<<<<<<< HEAD
-  let endOfGame = `<div class="container">
-  <h2>Final Quiz Score</h2>
-  ${scoreTemplate(true)}
-  <button class="js-restart-button">Restart Quiz?</button>
-</div>
-  `
-=======
   let results = `<div class="container">
   <h2>Final Quiz Score</h2>
   <h4>Correct: 3</h4>
   <h4>Incorrect: 2</h4>
   <button class="js-restart-button">Restart Quiz?</button>
 </div>`;
->>>>>>> 20657b8f73f50bb18a1ddf5c329f1172d9040697
   // "End of Game" on title
   let endGame = ` <div class="container">
   <h2>Final Quiz Score</h2>
@@ -192,11 +171,7 @@ function endOfGameTemplate() {
   $('main').html(endGame);
   // show score
   // newGame botton
-<<<<<<< HEAD
-  return endOfGame;
-=======
   
->>>>>>> 20657b8f73f50bb18a1ddf5c329f1172d9040697
 }
 
 /********** RENDER FUNCTION(S) **********/
