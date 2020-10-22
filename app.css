@@ -75,7 +75,7 @@ li{
   .score{
     height: auto;
     display: inline-flex;
-    width: 60%;
+    width: auto;
     padding: 30px;
     color: white;
     float: right;
