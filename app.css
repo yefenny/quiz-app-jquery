@@ -18,7 +18,7 @@ h4{
 button{
   font-size: 18px;
   height: auto;
-  width: 80px;
+  width: fit-content;
 }
 
 li{
