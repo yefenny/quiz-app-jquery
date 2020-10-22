@@ -107,7 +107,7 @@ function startPageTemplate() {
   // render a welcome message with a button to start the quiz
   let startPageTemplate = `<div class="container">
   <h2>Welcome to the quiz!</h2>
-  <p>Are you ready to test your knowledge on JQuery?</p>
+  <p>Are you ready to test your knowledge on jQuery?</p>
   <button class="js-start-button">Start!</button>
 </div>`;
   return startPageTemplate;
